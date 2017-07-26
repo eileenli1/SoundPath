@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MapWithDirections2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XAR-BW-5J2">
+                                <rect key="frame" x="0.0" y="185" width="768" height="839"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="b7O-38-GI7"/>
+                                </connections>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Sound Path" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T1-yP-dD4">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="163"/>
+                                <color key="backgroundColor" red="1" green="0.72229025069999997" blue="0.99274041690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="Courier" family="Courier" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" searchBarStyle="prominent" placeholder="Where would you like to go?" translatesAutoresizingMaskIntoConstraints="NO" id="RWE-5g-MmO">
+                                <rect key="frame" x="0.0" y="141" width="768" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="D0y-v3-KdX"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="RWE-5g-MmO" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="121" id="49a-ht-zMK"/>
+                            <constraint firstItem="RWE-5g-MmO" firstAttribute="trailing" secondItem="XAR-BW-5J2" secondAttribute="trailing" id="4wJ-Wm-IZ8"/>
+                            <constraint firstItem="XAR-BW-5J2" firstAttribute="top" secondItem="RWE-5g-MmO" secondAttribute="bottom" id="6oW-Gb-U2Y"/>
+                            <constraint firstItem="4T1-yP-dD4" firstAttribute="trailing" secondItem="RWE-5g-MmO" secondAttribute="trailing" id="9Xy-Kp-23f"/>
+                            <constraint firstItem="XAR-BW-5J2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="DGe-6N-Sfl"/>
+                            <constraint firstItem="4T1-yP-dD4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EBB-v4-D75"/>
+                            <constraint firstItem="4T1-yP-dD4" firstAttribute="leading" secondItem="RWE-5g-MmO" secondAttribute="leading" id="NvM-TS-oJy"/>
+                            <constraint firstItem="XAR-BW-5J2" firstAttribute="top" secondItem="4T1-yP-dD4" secondAttribute="bottom" constant="22" id="TcI-kE-gYw"/>
+                            <constraint firstAttribute="trailing" secondItem="4T1-yP-dD4" secondAttribute="trailing" id="WCT-2n-jAz"/>
+                            <constraint firstItem="RWE-5g-MmO" firstAttribute="leading" secondItem="XAR-BW-5J2" secondAttribute="leading" id="Z3J-sL-zWa"/>
+                            <constraint firstItem="4T1-yP-dD4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cX7-L7-Ziy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="directionsLabel" destination="4T1-yP-dD4" id="cSi-La-Le7"/>
+                        <outlet property="mapView" destination="XAR-BW-5J2" id="R8h-pZ-S8Y"/>
+                        <outlet property="searchBar" destination="RWE-5g-MmO" id="h84-OR-HfU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.1875" y="123.63281249999999"/>
+        </scene>
+    </scenes>
+</document>
