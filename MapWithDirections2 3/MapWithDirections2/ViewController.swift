@@ -52,13 +52,14 @@ class ViewController: UIViewController {
         //let mag = Magnetometer()
         //mag.runMagnetometer()
         
+        
+        
+        // setting up basic GPS features
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation //May take too much power
         locationManager.startUpdatingLocation()
         
-        for _ in 1...100{
-            print("patrick is dumb")
         }
         
     }
