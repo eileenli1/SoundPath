@@ -3,7 +3,6 @@
 //  MapWithDirections2
 //
 //  Created by Student on 7/23/17.
-//  Copyright © 2017 Patrick Kan. All rights reserved.
 //
 
 import UIKit
@@ -52,21 +51,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     var stepCounter = 0
     
-    //Starting Dr J's code -------------------------
     
-    // Declare out own Pi for doing operations with angles
+    // Declare Pi for doing operations with angles
     let PI : Float = 3.14159265359
     
     /*
      ===========================================================================================
-     We need to create a signal flow connecting the nodes: Source -> Mixer3D -> Mixer -> Output
+     create a signal flow connecting the nodes: Source -> Mixer3D -> Mixer -> Output
      ===========================================================================================
      */
     // Audio engine for managing all audio
     var engine: AVAudioEngine!
     /*
      ======================================================================================================
-     We create a source: A player system that is built with a path, a file, a buffer, and a player node
+     create a source: A player system that is built with a path, a file, a buffer, and a player node
      ======================================================================================================
      */
     // A file
@@ -77,21 +75,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var player:  AVAudioPlayerNode!
     /*
      ======================================================================================================
-     We declared the source player
+     declare the source player
      ======================================================================================================
      */
-    // We need an output node
+    // output node
     var output: AVAudioOutputNode!
-    // A mixer node to send all sounds
+    // mixer node to send all sounds
     var mixer: AVAudioMixerNode!
-    // A mixer 3D to send sounds that we want to spatialize and locate them at a point in a 3D space
+    // mixer 3D to send sounds that we want to spatialize and locate them at a point in a 3D space
     var mixer3d: AVAudioEnvironmentNode!
     
     //var multiChannelOutputEnable: Bool!
     
-    // We can select an algorithm for spatialization: 1 = Spherical Head, 2 = Head Related Transfer Function (HRTF)
+    // select an algorithm for spatialization: 1 = Spherical Head, 2 = Head Related Transfer Function (HRTF)
     var selectedAlgorithm: Int!
-    // To store an arbitraty orietn
+    // To store an arbitrary orientation
 
     //var orientation = AVAudioMake3DAngularOrientation(0.0,0.0,0.0)
  
@@ -113,10 +111,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         catch {
             print("Cannot load audiofile!")
         }
-        // We need the following two statements to use our buffer object
+        // need the following two statements to use buffer object
         let audioFormat = file.processingFormat
         let audioFrameCount = UInt32(file.length)
-        // we create an instance of the buffer
+        // create an instance of the buffer
         buffer = AVAudioPCMBuffer(pcmFormat: audioFormat, frameCapacity: audioFrameCount)
         do {
             try file.read(into: buffer, frameCount: audioFrameCount)
@@ -127,7 +125,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         //locationManager.startUpdatingHeading()
-        // We create a helper function to init the sound engine (makes code easier to read and clean)
+        // create a helper function to init the sound engine (makes code easier to read and clean)
         initEngine()
     }
     
@@ -139,7 +137,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Helper function to initialize the player (source) and head (mixer3D or EnvironmentNode)
         initPositions()//(mixer3d, playerPosition: player)
         
-        // Here we connect the nodes following a signal flow chain
+        // connect the nodes following a signal flow chain
         mixer = engine.mainMixerNode
         engine.attach(player)
         engine.attach(mixer3d)
@@ -156,6 +154,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             print("Cannot initialize engine")
         }
         player.play()
+        
+        //. ADD DOCUMENTATION HERE........
         
         if(foundLocation)
         {
@@ -185,6 +185,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // initial position of the mixer/sound source
     
     func initPositions(){
         mixer3d.listenerPosition.x = 10
@@ -217,7 +218,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         mixer3d.listenerAngularOrientation.yaw = degrees(yaw!)
     }
     
-    //End Dr. Martin Jaroszweicz's code -------------------------------
+
     
     
     
@@ -242,25 +243,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //let mag = Magnetometer()
         //mag.runMagnetometer()
         
-        //Martin Jaroszewicz's Code -------------------
         
-        // Setup an update interval. It varies depending on the application
+        // Setup an update interval, varies depending on the application
         motionManager.deviceMotionUpdateInterval = 0.07
         motionManager.gyroUpdateInterval = 0.07
-        // We get the values from the IMU as Attitude (Pitch, Roll, Yaw) using a closure
+        // get values from the IMU as Attitude (Pitch, Roll, Yaw) using a closure
         motionManager.startDeviceMotionUpdates(using: CMAttitudeReferenceFrame.xMagneticNorthZVertical, to: OperationQueue.main) {
             (motion: CMDeviceMotion?, _) in
             
             // Attitude -----------------------------------------------------------
             if let attitude: CMAttitude = motion?.attitude {
                 
-                //We put the data from sensors in a Dictionary for easy debbuging and sharing (we could delcare d at the top too)
+                // put the data from sensors in a Dictionary for easy debbuging and sharing ( could declare d at the top too)
                 var d = [String:Float]()
                 //d["roll"] = Float(attitude.roll)
                 //d["pitch"] = Float(attitude.pitch)
                 d["yaw"] = Float(attitude.yaw)
                 //print(d)
-                // We send the dictionary to a function to keep code clean
                 self.receivedOrientationDictionary(d)
                 
             }
@@ -270,8 +269,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
          End Motion Manager code
          ===============================================================
          */
-        
-        //End of Martin Jaroszewicz's Code
+
 
         
         locationManager.requestAlwaysAuthorization() 
@@ -282,6 +280,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation() //Begins to update location
         
     }
+    
+    // function to change the music in the application.
     
     @IBAction func changeMusic(_ sender: UIButton) {
         musicCount+=1
@@ -323,6 +323,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
         initEngine()
     }
+    
+    // gets directions to desired location.
     
     func getDirections(to destination: MKMapItem) {
         let sourcePlacemark = MKPlacemark(coordinate: currentCoordinate)
@@ -498,6 +500,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
     }
     
+    // prints directions/coordinates of next location as well as angle from it
+    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("ENTERED")
         stepCounter += 1
@@ -617,7 +621,7 @@ extension ViewController: CLLocationManagerDelegate {
     }
 }
 */
-//Search Bar
+//Search Bar to search for destinations
 extension ViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
