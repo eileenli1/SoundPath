@@ -3,7 +3,6 @@
 //  MapWithDirections2
 //
 //  Created by Student on 7/23/17.
-//  Copyright © 2017 Patrick Kan. All rights reserved.
 //
 
 import UIKit
